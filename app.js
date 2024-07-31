@@ -1,16 +1,30 @@
-const fromEuroToDollar = function(valueInEuro) {
-    let valueInDollar = valueInEuro * 1.07;
-    return valueInDollar;
+// Conversion rates
+const oneEuroIs = {
+    "JPY": 156.5, // Japan Yen
+    "USD": 1.07, // US Dollar
+    "GBP": 0.87 // British Pound
+};
+
+const dollarToEuroRate = 1 / oneEuroIs["USD"];
+const yenToEuroRate = 1 / oneEuroIs["JPY"];
+
+// Functions
+function fromEuroToDollar(euro) {
+    return euro * oneEuroIs["USD"];
 }
 
-const fromDollarToYen = function(valueInDollar) {
-    let valueInYen = valueInDollar * 149.03;
-    return valueInYen;
+function fromDollarToYen(dollar) {
+    // Convert dollar to euro first
+    const euros = dollar * dollarToEuroRate;
+    // Convert euros to yen
+    return euros * oneEuroIs["JPY"];
 }
 
-const fromYenToPound = function(valueInYen) {
-    let valueInPound = valueInYen * 0.0072;
-    return valueInPound; 
+function fromYenToPound(yen) {
+    // Convert yen to euro first
+    const euros = yen * yenToEuroRate;
+    // Convert euros to pounds
+    return euros * oneEuroIs["GBP"];
 }
 
 module.exports = { fromEuroToDollar, fromDollarToYen, fromYenToPound };
